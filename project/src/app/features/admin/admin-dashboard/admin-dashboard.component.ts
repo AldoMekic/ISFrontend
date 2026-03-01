@@ -11,6 +11,7 @@ type PendingProfessorRow = {
   title?: string;
   department?: { name?: string } | null;
   user: {
+    id?: number; 
     first_name?: string;
     last_name?: string;
     email?: string;
@@ -103,6 +104,7 @@ export class AdminDashboardComponent implements OnInit {
     if (!Number.isFinite(id)) return null;
 
     const user = raw?.user ?? raw?.User ?? {};
+    const userId = Number(user?.id ?? raw?.userId ?? raw?.user_id);
 
     const first_name =
       user?.first_name ?? user?.firstName ?? raw?.first_name ?? raw?.firstName ?? '';
@@ -120,7 +122,7 @@ export class AdminDashboardComponent implements OnInit {
       id,
       title: raw?.title ?? raw?.Title ?? '',
       department: deptName ? { name: deptName } : null,
-      user: { first_name, last_name, email, age }
+      user: { id: Number.isFinite(userId) ? userId : undefined, first_name, last_name, email, age }
     };
   }
 
@@ -202,18 +204,23 @@ export class AdminDashboardComponent implements OnInit {
     this.showSubjectModal = false;
   }
 
-  // ✅ Approvals (requires backend endpoints)
   async approveProfessor(professor: PendingProfessorRow) {
-    try {
-      await this.professorsService.approveProfessor(professor.id);
-      this.pendingProfessors = this.pendingProfessors.filter(p => p.id !== professor.id);
-      await this.loadApprovedProfessors();
-      alert('Professor approved.');
-    } catch (err) {
-      console.error('[AdminDashboard] approveProfessor failed', err);
-      alert('Approve failed. Backend endpoint POST /api/professors/{id}/approve is required.');
+  try {
+    const userId = professor.user?.id;
+    if (!userId) {
+      alert('Missing userId for this professor.');
+      return;
     }
+
+    await this.professorsService.approveProfessor(userId); // ✅ userId, not professor.id
+    this.pendingProfessors = this.pendingProfessors.filter(p => p.id !== professor.id);
+    await this.loadApprovedProfessors();
+    alert('Professor approved.');
+  } catch (err) {
+    console.error('[AdminDashboard] approveProfessor failed', err);
+    alert('Approve failed.');
   }
+}
 
   async rejectProfessor(professor: PendingProfessorRow) {
     try {

@@ -84,12 +84,12 @@ export class ProfessorsService {
 
   // ✅ NEW (used by Admin approvals if backend supports it)
   getPendingApprovals() {
-    return firstValueFrom(this.api.get<any[]>('api/professors/pending'));
+    return firstValueFrom(this.api.get<any[]>('api/admins/pending-professor-profiles'));
   }
 
-  approveProfessor(professorId: number) {
-    return firstValueFrom(this.api.post<void>(`api/professors/${professorId}/approve`, {}));
-  }
+  approveProfessor(userId: number) {
+  return firstValueFrom(this.api.put<void>(`api/admins/approve/${userId}`, {}));
+}
 
   rejectProfessor(professorId: number) {
     return firstValueFrom(this.api.post<void>(`api/professors/${professorId}/reject`, {}));
