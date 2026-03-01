@@ -1,0 +1,50 @@
+<div class="home-container">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <h1>University Portal</h1>
+    </div>
+    <div class="navbar-actions" *ngIf="!user; else loggedIn">
+      <a routerLink="/login" class="btn btn-primary">Login</a>
+      <a routerLink="/register" class="btn btn-secondary">Register</a>
+    </div>
+    <ng-template #loggedIn>
+      <div class="navbar-actions">
+        <a *ngIf="hasRole('student')" routerLink="/student" class="btn btn-primary">Student Dashboard</a>
+        <a *ngIf="hasRole('professor')" routerLink="/professor" class="btn btn-primary">Professor Dashboard</a>
+        <a *ngIf="hasRole('admin')" routerLink="/admin" class="btn btn-danger">Admin Dashboard</a>
+      </div>
+    </ng-template>
+  </nav>
+
+  <div class="hero">
+    <h2>Welcome to the University Study Portal</h2>
+    <p>Manage subjects, enrollments, grades, and attendance in one place.</p>
+    <div class="hero-actions" *ngIf="!user">
+      <a routerLink="/login" class="btn btn-primary">Login</a>
+      <a routerLink="/register" class="btn btn-secondary">Create Account</a>
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Students</h3>
+      <p>Browse and enroll in available subjects, track attendance and grades.</p>
+      <a routerLink="/login" class="btn btn-link" *ngIf="!user">Get started →</a>
+      <a routerLink="/student" class="btn btn-link" *ngIf="hasRole('student')">Go to dashboard →</a>
+    </div>
+
+    <div class="card">
+      <h3>Professors</h3>
+      <p>Manage your subjects, record attendance and assign grades.</p>
+      <a routerLink="/login" class="btn btn-link" *ngIf="!user">Get started →</a>
+      <a routerLink="/professor" class="btn btn-link" *ngIf="hasRole('professor')">Go to dashboard →</a>
+    </div>
+
+    <div class="card">
+      <h3>Admins</h3>
+      <p>Approve professors, manage departments and subjects.</p>
+      <a routerLink="/login" class="btn btn-link" *ngIf="!user">Get started →</a>
+      <a routerLink="/admin" class="btn btn-link" *ngIf="hasRole('admin')">Go to dashboard →</a>
+    </div>
+  </div>
+</div>

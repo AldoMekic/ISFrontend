@@ -1,0 +1,98 @@
+.home-container {
+  min-height: 100vh;
+  background: #f7fafc;
+}
+
+.navbar {
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-brand h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #2d3748;
+}
+
+.navbar-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.hero {
+  max-width: 1000px;
+  margin: 60px auto 20px;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.hero h2 {
+  font-size: 36px;
+  color: #2d3748;
+  margin-bottom: 12px;
+}
+
+.hero p {
+  font-size: 18px;
+  color: #4a5568;
+  margin-bottom: 24px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.cards {
+  max-width: 1200px;
+  margin: 20px auto 60px;
+  padding: 0 20px;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 20px;
+}
+
+.card h3 {
+  margin-top: 0;
+  color: #2d3748;
+  font-size: 20px;
+}
+
+.card p {
+  color: #4a5568;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary { background: #667eea; color: white; }
+.btn-primary:hover { background: #5568d3; }
+
+.btn-secondary { background: #718096; color: white; }
+.btn-secondary:hover { background: #4a5568; }
+
+.btn-danger { background: #e53e3e; color: white; }
+.btn-danger:hover { background: #c53030; }
+
+.btn-link { color: #667eea; text-decoration: none; }
+.btn-link:hover { text-decoration: underline; }
